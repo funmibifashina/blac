@@ -20,21 +20,21 @@ var app = {
     hair: {
       background: "#000",
       _centered: true,
-      classes: "animated infinite bounce",
+      _classes: "animated infinite bounce",
       height: 170,
       width: 110
     },
     head: {
       background: "brown",
       _centered: true,
-      classes: "animated infinite bounce",
+      _classes: "animated infinite bounce",
       "margin-top": 10,
       height: 90,
       width: 90,
       "z-index": 6
     },
     body: {
-      classes: "animated infinite pulse",
+      _classes: "animated infinite pulse",
       _centered: true,
       background: "red",
       "margin-top": 90,
@@ -68,7 +68,7 @@ var app = {
     var avatar = this.player.avatar;
     for( var bodyPartName in avatar ){
       var bodyPart = avatar[bodyPartName];
-      var bodyPartElement = "<div id='" + bodyPartName + "'" + " class='" + bodyPart.classes + "'>";
+      var bodyPartElement = "<div id='" + bodyPartName + "'" + " class='" + bodyPart._classes + "'>";
       $(bodyPartElement).appendTo(".frame").css(bodyPart);
       if(bodyPart._centered){
         this.centerBodyPart(bodyPartName)
@@ -81,7 +81,7 @@ var app = {
     var bodyPart = this.player.avatar[bodyPartName];
 
     $("#" + bodyPartName).css(this.centeredStyle);
-    var ny = -1*(bodyPart.width/2);
-    $("#" + bodyPartName).css("margin-left", ny);
+    var marginLeft = -1*(bodyPart.width/2);
+    $("#" + bodyPartName).css("margin-left", marginLeft);
   }
 }
