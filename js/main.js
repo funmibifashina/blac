@@ -1,3 +1,7 @@
+/* ****************************
+Notes to self...
+**************************** */
+
 //player - who is currently on the screen
 //direction - left, right, front, back
 //what are the arms doing - left/right
@@ -5,27 +9,30 @@
 //animation - what animation is currently happening
 
 
+
+/* ****************************
+Character
+**************************** */
 var character = {
 
-    initialize: function (attr) {
+    initialize: function (chars) {
         var view = this;
 
-        $.each(attr, function (key, index) {
-            console.log(key, index);
+        $.each(chars, function (i, character) {
 
-            player = (index.player) ? index.player : false;
+            player = (character.player) ? character.player : false;
             //conditional statement if no player has been declared
             if (!player) return;
 
-            gender = (index.gender) ? index.gender : 'male';
-            skinTone = (index.skinTone) ? index.skinTone : '#fff';
-            headHeight = (index.headHeight) ? index.headHeight : 100;
-            headWidth = (index.headWidth) ? index.headWidth : 100;
-            animateHead = (index.animateHead) 
-                ? index.animateHead 
+            gender = (character.gender) ? character.gender : 'male';
+            skinTone = (character.skinTone) ? character.skinTone : '#fff';
+            headHeight = (character.headHeight) ? character.headHeight : 100;
+            headWidth = (character.headWidth) ? character.headWidth : 100;
+            animateHead = (character.animateHead) 
+                ? character.animateHead 
                 : 'bounce';
-            animateBody = (index.animateBody) 
-                ? index.animateBody 
+            animateBody = (character.animateBody) 
+                ? character.animateBody 
                 : 'bounce';
             direction = 'front';
 
@@ -89,81 +96,68 @@ var character = {
     }
 };
 
-var buildCharFrame = {
-    createChar: function (playerName) {
-        var template = "<div id=" + playerName + " class='character'>" +
-            "<div class='hair animated infinite bounce'></div>" +
-            "<div class='brain animated infinite bounce'>" +
-            "<div class='face'>" +
-            "<div class='eyes'>^   ^<br> _____</div>" +
-            "<div class='mouth'></div>" +
-            "</div>" +
-            "<div class='hair-overlay'>" +
-            "<div class='left'>" +
-            "<div class='half'></div>" +
-            "</div>" +
-            "<div class='right'>" +
-            "<div class='half'></div>" +
-            "</div>" +
-            "<div class='left-down'></div>" +
-            "<div class='right-down'></div>" +
-            "</div>" +
-            "</div>" +
 
-            "<div class='bod animated infinite pulse'>" +
-            "<div class='arms'>" +
-            "<div class='right'></div>" +
-            "<div class='left'></div>" +
-            "</div>" +
-            "</div>" +
 
-            "<div class='legs'>" +
-            "<div class='right'></div>" +
-            "<div class='left'></div>" +
-            "</div>" +
-            "</div>";
+/* ****************************
+Create a character on screen
+**************************** */
 
-        $('body').append(template);
-    }
+function drawCharacter (playerName) {
+    var template = "<div id=" + playerName + " class='character'>" +
+        "<div class='hair animated infinite bounce'></div>" +
+        "<div class='brain animated infinite bounce'>" +
+        "<div class='face'>" +
+        "<div class='eyes'>^   ^<br> _____</div>" +
+        "<div class='mouth'></div>" +
+        "</div>" +
+        "<div class='hair-overlay'>" +
+        "<div class='left'>" +
+        "<div class='half'></div>" +
+        "</div>" +
+        "<div class='right'>" +
+        "<div class='half'></div>" +
+        "</div>" +
+        "<div class='left-down'></div>" +
+        "<div class='right-down'></div>" +
+        "</div>" +
+        "</div>" +
+
+        "<div class='bod animated infinite pulse'>" +
+        "<div class='arms'>" +
+        "<div class='right'></div>" +
+        "<div class='left'></div>" +
+        "</div>" +
+        "</div>" +
+
+        "<div class='legs'>" +
+        "<div class='right'></div>" +
+        "<div class='left'></div>" +
+        "</div>" +
+        "</div>";
+
+    $('body').append(template);
 };
 
-$(document).ready(function () {
 
-    //character names
-    var charNames = new Array('funmibi', 'shavanthi'),
-        charAttr = null;
+/* ****************************
+Pre-made Default characters
+**************************** */
 
-    //build a character template
-    $.each(charNames, function (key, index) {
-
-        buildCharFrame.createChar(index);
-        charAttr = {
-            funmibi: {
-                'player': 'funmibi',
-                    'gender': 'female',
-                    'skinTone': '#452D00',
-                    'headHeight': 100,
-                    'headWidth': 100,
-                    'animatedHead': 'bounce',
-                    'aimatedBody': 'bounce'
-            },
-            shivanthi: {
-                'player': 'shavanthi',
-                    'gender': 'female',
-                    'skinTone': '#4A330A',
-                    'headHeight': 110,
-                    'headWidth': 100,
-                    'animatedHead': 'bounce',
-                    'aimatedBody': 'bounce'
-            }
-        };
-    });
-
-    //controls for the characters
-    /*player, gender, headHeight, headWidth, bodyHeight, bodyWidth, armsHeight, legsHeight, positionX, positionY, animateHead, animateBody, direction*/
-
-
-
-    //pass character attributes
-    character.initialize(charAttr);
-});
+var characters = {
+    funmibi: {
+        'gender': 'female',
+        'skinTone': '#452D00',
+        'headHeight': 100,
+        'headWidth': 100,
+        'animatedHead': 'bounce',
+        'aimatedBody': 'bounce'
+    },
+    shivanthi: {
+        'gender': 'female',
+        'skinTone': '#4A330A',
+        'headHeight': 110,
+        'headWidth': 100,
+        'animatedHead': 'bounce',
+        'aimatedBody': 'bounce'
+    }
+};
